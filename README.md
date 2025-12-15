@@ -1,1 +1,2 @@
 # Credit-Card-Fraud-Detection-Analysis
+Credit card fraud is a major challenge in the financial sector, causing significant losses to banks and customers. This project focuses on exploring and modeling credit card transactions to identify potentially fraudulent activity. The goal is to build a machine learning solution that can help financial institutions detect unusual transactions and reduce fraud risk.
