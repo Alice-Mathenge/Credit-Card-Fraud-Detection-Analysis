@@ -35,6 +35,11 @@ This project addresses the critical challenge of credit card fraud in the financ
 `Challenge:` The dataset is highly imbalanced, with fraudulent transactions accounting for less than 0.2% of all records.  
 This motivated the use of specialized evaluation metrics (Recall, F1-score, PR-AUC) and resampling techniques (SMOTE).
 
+**Class Distribution:**
+
+![Fraud Detection Model Output](image.png)
+
+**Insight:** The visualization confirms a severe class imbalance, with fraud cases occurring far less frequently than legitimate transactions, which strongly influences model choice and evaluation strategy.
 
 ---
 
@@ -87,6 +92,14 @@ This motivated the use of specialized evaluation metrics (Recall, F1-score, PR-A
 ---
 
 ## **Model Performance Snapshot**
+
+
+| Metric          | Score    |
+|-----------------|----------|
+| Fraud Recall    | 0.87     |
+| Fraud Precision | 0.75     |
+| ROC-AUC         | 0.98     |
+
 - Fraud Recall: ~87% (most fraudulent transactions detected)
 - Fraud Precision: ~75% (reduced false alarms)
 - ROC-AUC: High discrimination between fraud and normal transactions
