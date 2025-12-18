@@ -20,20 +20,27 @@ This project addresses the critical challenge of credit card fraud in the financ
 ---
 
 ## **Data Understanding**
-`Source:` Credit Card Fraud Detection dataset (ULB/Kaggle).
+`Source:` Credit Card Fraud Detection dataset (ULB/Kaggle)  
+🔗 Dataset link: https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+
+
 `Observations:` 284,807 transactions.
 
 `Features:` 31 features, including Time, Amount, and 28 PCA-transformed numerical variables (V1–V28).
+> Note: Features V1–V28 are PCA-transformed variables provided by the dataset owners to protect sensitive customer information while preserving useful patterns for fraud detection.
+
 
 `Target:` Class (0 for legitimate, 1 for fraudulent).
 
-`Challenge:` Extreme class imbalance (fraudulent cases are a tiny fraction of total transactions).
+`Challenge:` The dataset is highly imbalanced, with fraudulent transactions accounting for less than 0.2% of all records.  
+This motivated the use of specialized evaluation metrics (Recall, F1-score, PR-AUC) and resampling techniques (SMOTE).
+
 
 ---
 
 ## **Data Preparation**
 
-`Data Cleaning:` Verified no missing values are present.
+`Data Cleaning:` Verified no missing values are present. Some duplicate transactions were identified, which were intentionally retained because removing them could eliminate valid repeated transactions or rare fraud cases. Keeping duplicates preserves the real-world transaction distribution and helps the model learn genuine fraud patterns more effectively.
 
 `Scaling:` Used StandardScaler and MinMaxScaler to normalize the Time and Amount columns.
 
@@ -61,13 +68,14 @@ This project addresses the critical challenge of credit card fraud in the financ
 
 - `Preprocessing:` Scaling numerical features and handling extreme class imbalance using SMOTE (Synthetic Minority Over-sampling Technique).
 
-- `Modeling:` Training multiple classifiers(Logistic Regression, LightGBM and XGBoost Classifier), with a focus on high-performance algorithm like XGBoost.
+- `Modeling:` Training multiple classifiers(Logistic Regression, LightGBM and XGBoost Classifier), with XGBoost emerging as the top-performing model.
 
 - `Optimization:` Hyperparameter tuning via GridSearchCV.
 
-- Evaluation: Prioritizing metrics like:    - *Confusion Matrix*, to visualize the trade-off between False positives and False Negatives.
-         - *Precision-Recall AUC* to evaluate how well the model identifies the minority (fraud) class. 
-         - *ROC-AUC Score* to measure the overall diagnostic ability of the classifiers.
+- `Evaluation:` Prioritizing metrics like:    
+    - `Confusion Matrix`, to visualize the trade-off between False positives and False Negatives.
+    - `Precision-Recall AUC` to evaluate how well the model identifies the minority (fraud) class. 
+    - `ROC-AUC Score` to measure the overall diagnostic ability of the classifiers.
 
 ---
 
@@ -75,6 +83,14 @@ This project addresses the critical challenge of credit card fraud in the financ
 `Final Model:` XGBoost was selected as the champion model due to its superior ability to detect fraud while maintaining efficiency.
 
 `Reproducibility:` The pipeline includes all preprocessing steps (scaling and sampling) to ensure the model performs consistently in a production environment.
+
+---
+
+## **Model Performance Snapshot**
+- Fraud Recall: ~87% (most fraudulent transactions detected)
+- Fraud Precision: ~75% (reduced false alarms)
+- ROC-AUC: High discrimination between fraud and normal transactions
+- Threshold tuning applied to balance fraud detection and customer experience
 
 ---
 
